@@ -12,7 +12,4 @@ public class AuthInfo {
     public static String AuthKey() {
         return Decryptor.decrypt(InfoProvider.KEY);
     }
-
-    public static String adress = AuthAdress();
-    public static String key = AuthKey();
 }
