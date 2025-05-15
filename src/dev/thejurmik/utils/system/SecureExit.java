@@ -6,8 +6,7 @@ import java.io.PrintStream;
 public class SecureExit {
     public static void exit() {
         silenceConsole();
-
-        Runtime.getRuntime().halt(-1);
+        Runtime.getRuntime().halt(0);
     }
 
     private static void silenceConsole() {

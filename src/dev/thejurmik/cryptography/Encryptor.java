@@ -5,37 +5,48 @@ import dev.thejurmik.utils.system.SecureExit;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.util.Arrays;
 import java.util.Base64;
 
 public class Encryptor {
-
-    private static final String KEY = "1A6F3E8D";
-    private static final String INIT_VECTOR = "RandomInitVector";
+    private static final char[] KEY = "1A6F3E8D".toCharArray();
+    private static final char[] INIT_VECTOR = "RandomInitVector".toCharArray();
     private static final String AES_MODE = "AES/CBC/PKCS5Padding";
 
-    public static String encrypt(String input) {
-        if (input == null || input.isEmpty()) {
-            return input;
+    public static char[] encrypt(char[] input) {
+        if (input == null || input.length == 0) {
+            return new char[0];
         }
+
+        byte[] keyBytes = null;
+        byte[] ivBytes = null;
+        byte[] encryptedBytes = null;
+
         try {
             Cipher cipher = Cipher.getInstance(AES_MODE);
-            SecretKeySpec keySpec = new SecretKeySpec(padKey().getBytes(), "AES");
-            IvParameterSpec ivSpec = new IvParameterSpec(INIT_VECTOR.getBytes());
+            keyBytes = padKey();
+            ivBytes = new String(INIT_VECTOR).getBytes();
+            SecretKeySpec keySpec = new SecretKeySpec(keyBytes, "AES");
+            IvParameterSpec ivSpec = new IvParameterSpec(ivBytes);
             cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec);
 
-            byte[] encryptedBytes = cipher.doFinal(input.getBytes());
-            return Base64.getEncoder().encodeToString(encryptedBytes);
+            encryptedBytes = cipher.doFinal(new String(input).getBytes());
+            return Base64.getEncoder().encodeToString(encryptedBytes).toCharArray();
         } catch (Exception e) {
             SecureExit.exit();
+            return new char[0];
+        } finally {
+            if (keyBytes != null) Arrays.fill(keyBytes, (byte) 0);
+            if (ivBytes != null) Arrays.fill(ivBytes, (byte) 0);
+            if (encryptedBytes != null) Arrays.fill(encryptedBytes, (byte) 0);
         }
-        return null;
     }
 
-    private static String padKey() {
-        StringBuilder paddedKey = new StringBuilder(Encryptor.KEY);
+    private static byte[] padKey() {
+        StringBuilder paddedKey = new StringBuilder(new String(KEY));
         while (paddedKey.length() < 16) {
             paddedKey.append(" ");
         }
-        return paddedKey.substring(0, 16);
+        return paddedKey.substring(0, 16).getBytes();
     }
 }

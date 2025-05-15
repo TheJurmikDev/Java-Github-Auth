@@ -4,12 +4,11 @@ import dev.thejurmik.InfoProvider;
 import dev.thejurmik.cryptography.Decryptor;
 
 public class AuthInfo {
-
-    public static String AuthAdress() {
-        return Decryptor.decrypt(InfoProvider.ADRESS);
+    public static char[] AuthAddress() {
+        return Decryptor.decrypt(InfoProvider.ADDRESS);
     }
 
-    public static String AuthKey() {
+    public static char[] AuthKey() {
         return Decryptor.decrypt(InfoProvider.KEY);
     }
 }
