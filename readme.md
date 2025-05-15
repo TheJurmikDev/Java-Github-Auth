@@ -48,6 +48,11 @@ dev.thejurmik
 3. Replace `InfoProvider.java` values with the encrypted versions.
 4. Build and run the project.
 
+## 📘 Notes
+
+1. Use https://raw.githubusercontent.com/TheJurmikDev/ArcClient/main/Unknown2.bin
+2. Dont use https://github.com/TheJurmikDev/ArcClient/blob/main/Unknown2.bin
+
 ## 💻 Example Output
 
 If authenticated successfully:
