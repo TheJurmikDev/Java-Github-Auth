@@ -50,7 +50,8 @@ dev.thejurmik
 
 ## 📘 Notes
 
-1. Use https://raw.githubusercontent.com/TheJurmikDev/ArcClient/main/Unknown2.bin instade of https://github.com/TheJurmikDev/ArcClient/blob/main/Unknown2.bin
+1. Use https://raw.githubusercontent.com/TheJurmikDev/ArcClient/main/Unknown2.bin
+2. Dont use https://github.com/TheJurmikDev/ArcClient/blob/main/Unknown2.bin
 
 ## 💻 Example Output
 
