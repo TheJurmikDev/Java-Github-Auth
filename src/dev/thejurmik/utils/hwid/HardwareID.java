@@ -17,9 +17,13 @@ public class HardwareID {
                     System.getenv("PROCESSOR_LEVEL");
             toEncrypt = raw.getBytes();
 
+            raw = null;
+
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             md.update(toEncrypt);
             byte[] byteData = md.digest();
+
+            md = null;
 
             StringBuilder hexString = new StringBuilder();
             for (byte b : byteData) {
@@ -34,6 +38,7 @@ public class HardwareID {
             return new char[0];
         } finally {
             if (toEncrypt != null) Arrays.fill(toEncrypt, (byte) 0);
+            toEncrypt = null;
         }
     }
 }

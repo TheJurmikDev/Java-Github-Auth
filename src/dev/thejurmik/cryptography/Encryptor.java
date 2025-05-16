@@ -9,9 +9,9 @@ import java.util.Arrays;
 import java.util.Base64;
 
 public class Encryptor {
-    private static final char[] KEY = "1A6F3E8D".toCharArray();
-    private static final char[] INIT_VECTOR = "RandomInitVector".toCharArray();
-    private static final String AES_MODE = "AES/CBC/PKCS5Padding";
+    private static char[] KEY = "1A6F3E8D".toCharArray();
+    private static char[] INIT_VECTOR = "RandomInitVector".toCharArray();
+    private static String AES_MODE = "AES/CBC/PKCS5Padding";
 
     public static char[] encrypt(char[] input) {
         if (input == null || input.length == 0) {
@@ -39,6 +39,17 @@ public class Encryptor {
             if (keyBytes != null) Arrays.fill(keyBytes, (byte) 0);
             if (ivBytes != null) Arrays.fill(ivBytes, (byte) 0);
             if (encryptedBytes != null) Arrays.fill(encryptedBytes, (byte) 0);
+            Arrays.fill(KEY, (char) 0);
+            Arrays.fill(INIT_VECTOR, (char) 0);
+            Arrays.fill(AES_MODE.toCharArray(), (char) 0);
+            Arrays.fill(input, (char) 0);
+            input = null;
+            keyBytes = null;
+            ivBytes = null;
+            encryptedBytes = null;
+            KEY = null;
+            INIT_VECTOR = null;
+            AES_MODE = null;
         }
     }
 

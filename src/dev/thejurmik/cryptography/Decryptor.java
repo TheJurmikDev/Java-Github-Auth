@@ -9,9 +9,9 @@ import java.util.Arrays;
 import java.util.Base64;
 
 public class Decryptor {
-    private static final char[] KEY = "1A6F3E8D".toCharArray();
-    private static final char[] INIT_VECTOR = "RandomInitVector".toCharArray();
-    private static final String AES_MODE = "AES/CBC/PKCS5Padding";
+    private static char[] KEY = "1A6F3E8D".toCharArray();
+    private static char[] INIT_VECTOR = "RandomInitVector".toCharArray();
+    private static String AES_MODE = "AES/CBC/PKCS5Padding";
 
     public static char[] decrypt(char[] encryptedInput) {
         if (encryptedInput == null || encryptedInput.length == 0) {
@@ -43,6 +43,15 @@ public class Decryptor {
             if (decodedBytes != null) Arrays.fill(decodedBytes, (byte) 0);
             if (decryptedBytes != null) Arrays.fill(decryptedBytes, (byte) 0);
         }
+    }
+
+    public static void cleanData() {
+        Arrays.fill(KEY, (char) 0);
+        Arrays.fill(INIT_VECTOR, (char) 0);
+        Arrays.fill(AES_MODE.toCharArray(), (char) 0);
+        KEY = null;
+        INIT_VECTOR = null;
+        AES_MODE = null;
     }
 
     private static byte[] padKey() {

@@ -16,13 +16,10 @@ public class GithubRequest {
         }
 
         HttpClient client = HttpClient.newHttpClient();
-        String urlStr = new String(fileUrl).trim();
-        if (!urlStr.startsWith("https://")) {
-            SecureExit.exit();
-        }
+        char[] urlStr = new String(fileUrl).trim().toCharArray();
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(urlStr))
+                .uri(URI.create(new String(fileUrl)))
                 .header("Authorization", "Bearer " + new String(token))
                 .header("Cache-Control", "no-cache")
                 .header("Pragma", "no-cache")
@@ -31,6 +28,13 @@ public class GithubRequest {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         Arrays.fill(token, '\0');
+        Arrays.fill(urlStr, '\0');
+        Arrays.fill(fileUrl, '\0');
+        token = null;
+        urlStr = null;
+        fileUrl = null;
+        request = null;
+        client = null;
         return response;
     }
 }

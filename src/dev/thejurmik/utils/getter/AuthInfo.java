@@ -2,13 +2,28 @@ package dev.thejurmik.utils.getter;
 
 import dev.thejurmik.InfoProvider;
 import dev.thejurmik.cryptography.Decryptor;
+import dev.thejurmik.utils.system.SecureExit;
 
 public class AuthInfo {
     public static char[] AuthAddress() {
-        return Decryptor.decrypt(InfoProvider.ADDRESS);
+        try {
+            return Decryptor.decrypt(InfoProvider.ADDRESS);
+        } catch (Exception e) {
+            SecureExit.exit();
+        } finally {
+            InfoProvider.ADDRESS = null;
+        }
+        return null;
     }
 
     public static char[] AuthKey() {
-        return Decryptor.decrypt(InfoProvider.KEY);
+        try {
+            return Decryptor.decrypt(InfoProvider.KEY);
+        } catch (Exception e) {
+            SecureExit.exit();
+        } finally {
+            InfoProvider.KEY = null;
+        }
+        return null;
     }
 }
