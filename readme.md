@@ -70,3 +70,5 @@ Otherwise, the app will terminate silently.
 - The app halts securely and silences all output upon failure.
 
 ---
+
+### 😎 Made By TheJurmik | Visit offical site https://thejurmik.dev
